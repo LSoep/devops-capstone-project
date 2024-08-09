@@ -123,4 +123,23 @@ class TestAccountService(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
 
-    # ADD YOUR TEST CASES HERE ...
+    # ADDITIONAL TEST CASES
+    def test_list_accounts(self):
+        """
+        It should GET a list of all Accounts
+        Never return a 404_NOT_FOUND Empty list returns 200_OK
+        """
+        response = self.client.get(BASE_URL)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertNotEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        all_accounts = response.get_json()
+        self.assertEqual(len(all_accounts),0)
+
+        # With Data
+        self._create_accounts(5)
+        response = self.client.get(BASE_URL)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        all_accounts = response.get_json()
+        self.assertEqual(len(all_accounts),5)
+
+
