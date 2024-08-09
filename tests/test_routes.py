@@ -125,8 +125,15 @@ class TestAccountService(TestCase):
 
     # ADDITIONAL TEST CASES
     def test_list_accounts(self):
+        """ It should GET a list of all Accounts """
+        self._create_accounts(5)
+        response = self.client.get(BASE_URL)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        all_accounts = response.get_json()
+        self.assertEqual(len(all_accounts),5)
+
+    def test_list_accounts_when_empty(self):
         """
-        It should GET a list of all Accounts
         Never return a 404_NOT_FOUND Empty list returns 200_OK
         """
         response = self.client.get(BASE_URL)
