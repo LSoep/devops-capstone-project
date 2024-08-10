@@ -61,6 +61,7 @@ def create_accounts():
 # LIST ALL ACCOUNTS
 ######################################################################
 
+
 @app.get("/accounts")
 def list_all_accounts():
     """
@@ -94,6 +95,7 @@ def get_an_account(account_id):
 # UPDATE AN EXISTING ACCOUNT
 ######################################################################
 
+
 @app.put("/accounts/<int:account_id>")
 def update_accounts(account_id):
     """
@@ -119,9 +121,8 @@ def delete_accounts(account_id):
     This endpoint will delete an Account based on the account id
     """
     app.logger.info("Request to delete an Account with id: %s", account_id)
-
     account = Account.find(account_id)
-    
+
     account.delete()
     return "", status.HTTP_204_NO_CONTENT
 
