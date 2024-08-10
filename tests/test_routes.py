@@ -175,5 +175,13 @@ class TestAccountService(TestCase):
     def test_update_nonexistant_account(self):
         """It should return error when account not found"""
         # update the nonexistantaccount
-        response = self.client.put(f"{BASE_URL}/{account['id']}")
+        response = self.client.put(f"{BASE_URL}/0")
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+    
+    def test_delete_an_account(self):
+        """It should DELETE an Account"""
+        account = self._create_accounts(1)[0]
+        response = self.client.delete(
+            f"{BASE_URL}/{account.id}")
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        
