@@ -130,7 +130,7 @@ class TestAccountService(TestCase):
         response = self.client.get(BASE_URL)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         all_accounts = response.get_json()
-        self.assertEqual(len(all_accounts),5)
+        self.assertEqual(len(all_accounts), 5)
 
     def test_list_accounts_when_empty(self):
         """
@@ -140,7 +140,7 @@ class TestAccountService(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertNotEqual(response.status_code, status.HTTP_404_NOT_FOUND)
         all_accounts = response.get_json()
-        self.assertEqual(len(all_accounts),0)
+        self.assertEqual(len(all_accounts), 0)
 
     def test_read_an_account(self):
         """It should GET an Account"""
@@ -177,11 +177,10 @@ class TestAccountService(TestCase):
         # update the nonexistantaccount
         response = self.client.put(f"{BASE_URL}/0")
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-    
+
     def test_delete_an_account(self):
         """It should DELETE an Account"""
         account = self._create_accounts(1)[0]
         response = self.client.delete(
             f"{BASE_URL}/{account.id}")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        
