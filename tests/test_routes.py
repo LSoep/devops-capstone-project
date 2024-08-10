@@ -126,8 +126,9 @@ class TestAccountService(TestCase):
         )
         self.assertEqual(response.status_code, status.HTTP_415_UNSUPPORTED_MEDIA_TYPE)
 
-
-### Added Account tests ###
+    ####
+    # Added Account tests
+    ####
 
     def test_list_accounts(self):
         """ It should GET a list of all Accounts """
@@ -190,8 +191,9 @@ class TestAccountService(TestCase):
             f"{BASE_URL}/{account.id}")
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
 
-
-##### Additional Tests including security
+    ####
+    # Additional Tests including security
+    ####
 
     def test_method_not_allowed(self):
         """It should not allow an illegal method call"""
